@@ -55,10 +55,10 @@ suite	// gUnit test suite based on individual rule
 	;
 
 test[gUnitTestSuite ts]	// individual test within a (rule)testsuite
-	:	input ok='OK' {$ts.testSuites.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new BooleanTest(true));}
-	|	input fail='FAIL' {$ts.testSuites.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new BooleanTest(false));}
-	|	input 'returns' RETVAL {$ts.testSuites.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new ReturnTest($RETVAL));}
-	|	input '->' output {$ts.testSuites.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new OutputTest($output.token));}
+	:	input ok='OK' {$ts.tests.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new BooleanTest(true));}
+	|	input fail='FAIL' {$ts.tests.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new BooleanTest(false));}
+	|	input 'returns' RETVAL {$ts.tests.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new ReturnTest($RETVAL));}
+	|	input '->' output {$ts.tests.put(new gUnitTestInput($input.testInput, $input.inputIsFile, $input.line), new OutputTest($output.token));}
 	;
 
 input returns [String testInput, boolean inputIsFile, int line]
